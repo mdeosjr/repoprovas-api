@@ -1,4 +1,4 @@
-type AppErrorTypes = 'conflict';
+type AppErrorTypes = 'conflict' | 'unauthorized' | 'not_found';
 
 export interface AppError {
 	type: AppErrorTypes;
@@ -11,4 +11,6 @@ export function isAppError(error: object): error is AppError {
 
 export function errorTypeToStatusCode(type: AppErrorTypes) {
 	if (type === 'conflict') return 409;
+	if (type === 'unauthorized') return 401;
+	if (type === 'not_found') return 404;
 }
