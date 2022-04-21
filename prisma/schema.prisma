@@ -7,53 +7,76 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model categories {
+model Categories {
   id    Int     @id @default(autoincrement())
   name  String  @unique
-  tests tests[]
+  tests Tests[]
+
+  @@map("categories")
 }
 
-model disciplines {
+model Disciplines {
   id                  Int                   @id @default(autoincrement())
   name                String                @unique
   termId              Int
-  terms               terms                 @relation(fields: [termId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  teachersDisciplines teachersDisciplines[]
+  terms               Terms                 @relation(fields: [termId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  teachersDisciplines TeachersDisciplines[]
+
+  @@map("disciplines")
 }
 
-model teachers {
+model Teachers {
   id                  Int                   @id @default(autoincrement())
   name                String                @unique
-  teachersDisciplines teachersDisciplines[]
+  teachersDisciplines TeachersDisciplines[]
+
+  @@map("teachers")
 }
 
-model teachersDisciplines {
+model TeachersDisciplines {
   id           Int         @id @default(autoincrement())
   teacherId    Int
   disciplineId Int
-  disciplines  disciplines @relation(fields: [disciplineId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  teachers     teachers    @relation(fields: [teacherId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  tests        tests[]
+  disciplines  Disciplines @relation(fields: [disciplineId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  teachers     Teachers    @relation(fields: [teacherId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  tests        Tests[]
+
+  @@map("teachersDisciplines")
 }
 
-model terms {
+model Terms {
   id          Int           @id @default(autoincrement())
   number      Int           @unique
-  disciplines disciplines[]
+  disciplines Disciplines[]
+
+  @@map("terms")
 }
 
-model tests {
+model Tests {
   id                    Int                 @id @default(autoincrement())
   name                  String
   pdfUrl                String
   categoryId            Int
   teachersDisciplinesId Int
-  categories            categories          @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  teachersDisciplines   teachersDisciplines @relation(fields: [teachersDisciplinesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  categories            Categories          @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  teachersDisciplines   TeachersDisciplines @relation(fields: [teachersDisciplinesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("tests")
 }
 
-model users {
+model Users {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
+
+  @@map("users")
+  Sessions Sessions[]
+}
+
+model Sessions {
+  id     Int   @id @default(autoincrement())
+  user   Users @relation(fields: [userId], references: [id])
+  userId Int
+
+  @@map("sessions")
 }
