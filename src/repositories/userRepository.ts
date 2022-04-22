@@ -9,16 +9,12 @@ export async function insert(createUser: UserData) {
 
 export async function findByEmail(email: string) {
     return await prisma.users.findUnique({
-        where: { 
-            email 
-        }
+        where: { email }
     })
 }
 
 export async function findById(userId: number) {
     return await prisma.users.findFirst({
-        where: {
-            id: userId
-        }
+        where: { id: userId }
     })
 }
