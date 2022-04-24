@@ -12,7 +12,7 @@ export async function validateToken(req: Request, res: Response, next: NextFunct
     if (!data) throw { type: 'unauthorized', message: 'Invalid token' };
 
     const user = await findById(data.userId);
-    if (!user) throw { type: 'unauthorized', message: 'User not found'};
+    if (!user) throw { type: 'unauthorized', message: 'User not found' };
 
 	res.locals.user = user;
 	next();
