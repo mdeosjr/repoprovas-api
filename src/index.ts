@@ -4,9 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import router from './routers/routes.js';
 import errorHandler from './middlewares/errorHandlingMiddleware.js';
-if (process.env.NODE_ENV !== 'production') {
-    dotenv.config();
-}
+dotenv.config();
 
 const server = express();
 
@@ -15,5 +13,5 @@ server.use(json());
 server.use(router);
 server.use(errorHandler);
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4040;
 server.listen(PORT);
