@@ -1,4 +1,4 @@
-type AppErrorTypes = 'conflict' | 'unauthorized' | 'not_found';
+type AppErrorTypes = 'conflict' | 'unauthorized' | 'not_found' | 'unprocessable_entity';
 
 export interface AppError {
 	type: AppErrorTypes;
@@ -13,4 +13,5 @@ export function errorTypeToStatusCode(type: AppErrorTypes) {
 	if (type === 'conflict') return 409;
 	if (type === 'unauthorized') return 401;
 	if (type === 'not_found') return 404;
+	if (type === 'unprocessable_entity') return 422;
 }

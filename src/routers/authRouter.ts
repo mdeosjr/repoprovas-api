@@ -7,6 +7,6 @@ import { validateToken } from '../middlewares/validateToken.js';
 const authRouter = Router();
 
 authRouter.post('/login', validateSchema(userDataSchema), authController.login)
-authRouter.post('/logout', validateToken, (req, res) => res.sendStatus(200))
+authRouter.post('/token', validateToken, (req, res) => res.sendStatus(200))
 
 export default authRouter;

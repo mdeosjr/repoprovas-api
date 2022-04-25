@@ -13,7 +13,7 @@ contentRouter.get(
 contentRouter.get(
     '/content/terms',
     validateToken,
-    contentController.getContentByTerms,
+    contentController.getContentByTerms
 )
 
 export default contentRouter;
