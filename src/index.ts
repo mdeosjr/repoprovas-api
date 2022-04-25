@@ -13,5 +13,5 @@ server.use(json());
 server.use(router);
 server.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 server.listen(PORT);
