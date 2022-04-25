@@ -4,7 +4,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import router from './routers/routes.js';
 import errorHandler from './middlewares/errorHandlingMiddleware.js';
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 const server = express();
 
