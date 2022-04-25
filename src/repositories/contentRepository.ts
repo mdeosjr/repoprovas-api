@@ -23,6 +23,7 @@ export async function getCategories(instructorId: number) {
 				select: {
 					id: true,
 					name: true,
+					pdfUrl: true,
 					teachersDisciplines: {
 						select: {
 							disciplines: {
