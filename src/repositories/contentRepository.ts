@@ -38,3 +38,45 @@ export async function getCategories(instructorId: number) {
 	});
 	return tests;
 }
+
+export async function getDisciplinesByTerms() {
+	return await prisma.terms.findMany({
+		select: {
+			id: true,
+			number: true,
+			disciplines: {
+				select: {
+					id: true,
+					name: true,
+				},
+			},
+		},
+	});
+}
+
+export async function getTestsByDiscipline(disciplineId: number) {
+	return await prisma.categories.findMany({
+		select: {
+			name: true,
+			tests: {
+				where: {
+					disciplineId
+				},
+				select: {
+					id: true,
+					name: true,
+					pdfUrl: true,
+					teachersDisciplines: {
+						select: {
+							teachers: {
+								select: {
+									name: true
+								}
+							}
+						}
+					}
+				}
+			},
+		}
+	})
+}

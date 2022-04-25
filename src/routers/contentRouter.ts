@@ -4,6 +4,16 @@ import * as contentController from '../controllers/contentController.js';
 
 const contentRouter = Router();
 
-contentRouter.get('/content/teachers', validateToken, contentController.getContent)
+contentRouter.get(
+	'/content/teachers',
+    validateToken,
+	contentController.getContentByInstructors
+);
+
+contentRouter.get(
+    '/content/terms',
+    validateToken,
+    contentController.getContentByTerms,
+)
 
 export default contentRouter;
