@@ -1,7 +1,7 @@
 import * as contentRepository from '../repositories/contentRepository.js';
 
-export async function instructorsContent() {
-	const teachers = await contentRepository.getInstructor();
+export async function teachersContent() {
+	const teachers = await contentRepository.getTeachers();
 
 	const array = [];
 

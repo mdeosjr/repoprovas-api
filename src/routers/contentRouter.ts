@@ -7,7 +7,7 @@ const contentRouter = Router();
 contentRouter.get(
 	'/content/teachers',
     validateToken,
-	contentController.getContentByInstructors
+	contentController.getContentByTeachers
 );
 
 contentRouter.get(
