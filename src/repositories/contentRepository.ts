@@ -1,3 +1,4 @@
+import { Tests } from '@prisma/client';
 import { prisma } from '../db.js';
 
 export async function getTeachers() {
@@ -5,12 +6,23 @@ export async function getTeachers() {
 		select: {
 			id: true,
 			name: true,
+			teachersDisciplines: {
+				select: {
+					disciplines: true,
+				},
+			},
 		},
 	});
 }
 
+export async function getTeachersByName(name: string) {
+	return await prisma.teachers.findUnique({
+		where: { name },
+	});
+}
+
 export async function getCategories(instructorId: number) {
-	const tests = await prisma.categories.findMany({
+	return await prisma.categories.findMany({
 		select: {
 			id: true,
 			name: true,
@@ -37,7 +49,6 @@ export async function getCategories(instructorId: number) {
 			},
 		},
 	});
-	return tests;
 }
 
 export async function getDisciplinesByTerms() {
@@ -61,7 +72,7 @@ export async function getTestsByDiscipline(disciplineId: number) {
 			name: true,
 			tests: {
 				where: {
-					disciplineId
+					disciplineId,
 				},
 				select: {
 					id: true,
@@ -71,13 +82,61 @@ export async function getTestsByDiscipline(disciplineId: number) {
 						select: {
 							teachers: {
 								select: {
-									name: true
-								}
-							}
-						}
-					}
-				}
+									name: true,
+								},
+							},
+						},
+					},
+				},
 			},
-		}
+		},
+	});
+}
+
+export async function getDisciplines() {
+	return await prisma.disciplines.findMany({
+		select: {
+			id: true,
+			name: true,
+			teachersDisciplines: true,
+		},
+	});
+}
+
+export async function getCategoriesList() {
+	return await prisma.categories.findMany({
+		select: {
+			id: true,
+			name: true,
+		},
+	});
+}
+
+export async function getCategoriesByName(name: string) {
+	return await prisma.categories.findUnique({
+		where: { name },
+	});
+}
+
+export async function getDisciplinesByName(name: string) {
+	return await prisma.disciplines.findUnique({
+		where: { name },
+	});
+}
+
+export async function getTeachersDisciplines(
+	teacherId: number,
+	disciplineId: number
+) {
+	return await prisma.teachersDisciplines.findFirst({
+		where: {
+			AND: [{ disciplineId }, { teacherId }],
+		},
+	});
+}
+
+export async function createTest(test: Omit<Tests, "id">) {
+	return await prisma.tests.create({
+		data: test
 	})
 }

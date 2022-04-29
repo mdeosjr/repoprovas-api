@@ -6,14 +6,32 @@ const contentRouter = Router();
 
 contentRouter.get(
 	'/content/teachers',
-    validateToken,
+	validateToken,
 	contentController.getContentByTeachers
 );
 
 contentRouter.get(
-    '/content/terms',
-    validateToken,
-    contentController.getContentByTerms
-)
+	'/content/terms',
+	validateToken,
+	contentController.getContentByTerms
+);
+
+contentRouter.get(
+	'/content/disciplines',
+	validateToken,
+	contentController.getContentByDisciplines
+);
+
+contentRouter.get(
+	'/content/categories',
+	validateToken,
+	contentController.getCategoriesList
+);
+
+contentRouter.post(
+	'/tests/create',
+	validateToken,
+	contentController.createTest
+);
 
 export default contentRouter;
