@@ -19,13 +19,27 @@ export async function getContentByTerms(req: Request, res: Response) {
 	res.status(200).send(content);
 }
 
+export async function getDisciplinesList(req: Request, res: Response) {
+	const content = await contentServices.disciplinesList()
+	res.status(200).send(content);
+}
+
 export async function getContentByDisciplines(req: Request, res: Response) {
-	const content = await contentServices.disciplinesContent();
+	const { id } = req.params;
+	const content = await contentServices.disciplinesContent(parseInt(id));
+
+	res.status(200).send(content);
+}
+
+export async function getDisciplinesByName(req: Request, res: Response) {
+	const { name } = req.params;
+	
+	const content = await contentServices.disciplinesByName(name);
 	res.status(200).send(content);
 }
 
 export async function getCategoriesList(req: Request, res: Response) {
-	const content = await contentServices.categoriesContent();
+	const content = await contentServices.categories();
 	res.status(200).send(content);
 }
 

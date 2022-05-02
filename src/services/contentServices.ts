@@ -25,40 +25,29 @@ export async function teachersContent() {
 	return array;
 }
 
+export async function disciplinesList() {
+	const disciplines = await contentRepository.getAllDisciplines();
+
+	return disciplines;
+}
+
+export async function disciplinesContent(disciplineId: number) {
+	const discipline = contentRepository.getTestsByDiscipline(disciplineId);
+
+	return discipline;
+}
+
 export async function termsContent() {
 	const terms = await contentRepository.getDisciplinesByTerms();
 
-	const array = [];
-
-	for (const term of terms) {
-		let tests = [];
-
-		for (const discipline of term.disciplines) {
-			tests.push({
-				disciplineName: discipline.name,
-				testsCategory: await contentRepository.getTestsByDiscipline(
-					discipline.id
-				),
-			});
-		}
-
-		const result = {
-			termId: term.id,
-			termName: term.number,
-			termTests: tests,
-		};
-
-		array.push(result);
-	}
-
-	return array;
+	return terms;
 }
 
-export async function disciplinesContent() {
-	return await contentRepository.getDisciplines();
+export async function disciplinesByName(name: string) {
+	return await contentRepository.getDisciplinesByName(name);
 }
 
-export async function categoriesContent() {
+export async function categories() {
 	return await contentRepository.getCategoriesList();
 }
 

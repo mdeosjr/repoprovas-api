@@ -16,8 +16,16 @@ contentRouter.get(
 	contentController.getContentByTerms
 );
 
+contentRouter.get('/content/disciplines', contentController.getDisciplinesList)
+
 contentRouter.get(
-	'/content/disciplines',
+	'/content/discipline/:name',
+	validateToken,
+	contentController.getDisciplinesByName
+);
+
+contentRouter.get(
+	'/content/disciplines/:id',
 	validateToken,
 	contentController.getContentByDisciplines
 );
