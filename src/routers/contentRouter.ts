@@ -16,7 +16,11 @@ contentRouter.get(
 	contentController.getContentByTerms
 );
 
-contentRouter.get('/content/disciplines', contentController.getDisciplinesList)
+contentRouter.get(
+	'/content/disciplines',
+	validateToken,
+	contentController.getDisciplinesList
+);
 
 contentRouter.get(
 	'/content/discipline/:name',
@@ -40,6 +44,12 @@ contentRouter.post(
 	'/tests/create',
 	validateToken,
 	contentController.createTest
+);
+
+contentRouter.patch(
+	'/test/:id',
+	validateToken,
+	contentController.updateTestViews
 );
 
 export default contentRouter;

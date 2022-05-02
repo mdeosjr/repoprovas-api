@@ -60,6 +60,7 @@ model Tests {
   categoryId            Int
   teachersDisciplinesId Int
   disciplineId          Int
+  viewsCount            Int                 @default(0)
   categories            Categories          @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   teachersDisciplines   TeachersDisciplines @relation(fields: [teachersDisciplinesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   disciplines           Disciplines         @relation(fields: [disciplineId], references: [id])

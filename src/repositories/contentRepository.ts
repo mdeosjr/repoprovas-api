@@ -36,6 +36,7 @@ export async function getCategories(instructorId: number) {
 					id: true,
 					name: true,
 					pdfUrl: true,
+					viewsCount: true,
 					teachersDisciplines: {
 						select: {
 							disciplines: {
@@ -55,9 +56,9 @@ export async function getAllDisciplines() {
 	return await prisma.disciplines.findMany({
 		select: {
 			name: true,
-			id: true
-		}
-	})
+			id: true,
+		},
+	});
 }
 
 export async function getDisciplinesByTerms() {
@@ -73,7 +74,7 @@ export async function getDisciplinesByTerms() {
 			},
 		},
 	});
-};
+}
 
 export async function getTestsByDiscipline(disciplineId: number) {
 	return await prisma.categories.findMany({
@@ -87,6 +88,7 @@ export async function getTestsByDiscipline(disciplineId: number) {
 					id: true,
 					name: true,
 					pdfUrl: true,
+					viewsCount: true,
 					teachersDisciplines: {
 						select: {
 							teachers: {
@@ -134,8 +136,15 @@ export async function getTeachersDisciplines(
 	});
 }
 
-export async function createTest(test: Omit<Tests, "id">) {
+export async function createTest(test: Omit<Tests, 'id' | 'viewsCount'>) {
 	return await prisma.tests.create({
-		data: test
-	})
+		data: test,
+	});
+}
+
+export async function updateViewsCount(testId: number) {
+	return await prisma.tests.update({
+		where: { id: testId },
+		data: { viewsCount: { increment: 1 } },
+	});
 }

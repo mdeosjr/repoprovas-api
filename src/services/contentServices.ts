@@ -59,7 +59,7 @@ export async function create(testData: CreateTest) {
 	const categoryId = await contentRepository.getCategoriesByName(category);
 	const teachersDisciplinesId = await contentRepository.getTeachersDisciplines(teacherId.id, disciplineId.id);
 
-	const test: Omit<Tests, "id"> = {
+	const test: Omit<Tests, "id" | "viewsCount"> = {
 		name,
 		pdfUrl,
 		categoryId: categoryId.id,
@@ -68,4 +68,8 @@ export async function create(testData: CreateTest) {
 	};
 
 	return await contentRepository.createTest(test)
+}
+
+export async function update(testId: number) {
+	return await contentRepository.updateViewsCount(testId)
 }

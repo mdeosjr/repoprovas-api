@@ -20,7 +20,7 @@ export async function getContentByTerms(req: Request, res: Response) {
 }
 
 export async function getDisciplinesList(req: Request, res: Response) {
-	const content = await contentServices.disciplinesList()
+	const content = await contentServices.disciplinesList();
 	res.status(200).send(content);
 }
 
@@ -33,7 +33,7 @@ export async function getContentByDisciplines(req: Request, res: Response) {
 
 export async function getDisciplinesByName(req: Request, res: Response) {
 	const { name } = req.params;
-	
+
 	const content = await contentServices.disciplinesByName(name);
 	res.status(200).send(content);
 }
@@ -48,4 +48,11 @@ export async function createTest(req: Request, res: Response) {
 
 	await contentServices.create(body);
 	res.sendStatus(201);
+}
+
+export async function updateTestViews(req: Request, res: Response) {
+	const { id } = req.params;
+	
+	await contentServices.update(parseInt(id));
+	res.sendStatus(200);
 }
