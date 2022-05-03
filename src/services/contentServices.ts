@@ -32,6 +32,9 @@ export async function disciplinesList() {
 }
 
 export async function disciplinesContent(disciplineId: number) {
+	const existentDiscipline = await contentRepository.getDisciplinesById(disciplineId);
+	if (!existentDiscipline) throw { type: 'not_found', message: 'Discipline not found'}
+
 	const discipline = contentRepository.getTestsByDiscipline(disciplineId);
 
 	return discipline;
@@ -44,7 +47,10 @@ export async function termsContent() {
 }
 
 export async function disciplinesByName(name: string) {
-	return await contentRepository.getDisciplinesByName(name);
+	const discipline = await contentRepository.getDisciplinesByName(name);
+	if(!discipline) throw { type: 'not_found', message: 'Discipline not found' };
+
+	return discipline;
 }
 
 export async function categories() {
@@ -71,5 +77,8 @@ export async function create(testData: CreateTest) {
 }
 
 export async function update(testId: number) {
+	const test = await contentRepository.getTestsById(testId)
+	if(!test) throw { type: 'not_found', message: 'Test not found' };
+	
 	return await contentRepository.updateViewsCount(testId)
 }

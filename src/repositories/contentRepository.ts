@@ -76,6 +76,14 @@ export async function getDisciplinesByTerms() {
 	});
 }
 
+export async function getDisciplinesById(disciplineId: number) {
+	return await prisma.disciplines.findUnique({
+		where: {
+			id: disciplineId
+		}
+	})
+}
+
 export async function getTestsByDiscipline(disciplineId: number) {
 	return await prisma.categories.findMany({
 		select: {
@@ -140,6 +148,14 @@ export async function createTest(test: Omit<Tests, 'id' | 'viewsCount'>) {
 	return await prisma.tests.create({
 		data: test,
 	});
+}
+
+export async function getTestsById(testId: number) {
+	return await prisma.tests.findUnique({
+		where: {
+			id: testId
+		}
+	})
 }
 
 export async function updateViewsCount(testId: number) {

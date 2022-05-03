@@ -33,7 +33,8 @@ export async function getContentByDisciplines(req: Request, res: Response) {
 
 export async function getDisciplinesByName(req: Request, res: Response) {
 	const { name } = req.params;
-
+	if (!name) throw { type: 'bad_request' , message: 'Discipline does not exist' };
+	
 	const content = await contentServices.disciplinesByName(name);
 	res.status(200).send(content);
 }
