@@ -45,7 +45,7 @@ describe('POST /users/create', () => {
     });
 });
 
-describe('POST /sign-in', () => {
+describe('POST /login', () => {
     startTest();
 
     it("should return 200 and a token given a valid body", async() => {
@@ -67,3 +67,53 @@ describe('POST /sign-in', () => {
     })
 });
 
+describe('GET /content/teachers', () => {
+    startTest();
+
+    it.todo("should return 200 and a array with content given a valid token")
+})
+
+describe('GET /content/terms', () => {
+    startTest();
+
+    it.todo("should return 200 and a array with content given a valid token")
+})
+
+describe('GET /content/disciplines', () => {
+    startTest();
+
+    it.todo("should return 200 and a array with content given a valid token")
+})
+
+describe('GET /content/discipline/:name', () => {
+    startTest();
+
+    it.todo("should return 200 and a array with content given a valid params")
+    it.todo("should return 404 given invalid params")
+})
+
+describe('GET /content/discipline/:id', () => {
+	startTest();
+
+	it.todo('should return 200 and a array with content given a valid params');
+	it.todo('should return 404 given invalid params');
+});
+
+describe('GET /content/categories', () => {
+	startTest();
+
+	it.todo('should return 200 and a array with content given a valid token');
+});
+
+describe('POST /tests/create', () => {
+    startTest();
+
+    it.todo("should return 201 and persist test in database given valid body")
+    it.todo("should return 422 given a invalid body")
+})
+
+describe('PATCH /test/:id', () => {
+    startTest();
+
+    it.todo("should return 200 given a valid token")
+})

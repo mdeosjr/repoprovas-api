@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { validateToken } from '../middlewares/validateToken.js';
+import { validateSchema } from '../middlewares/validateSchema.js';
+import testDataSchema from '../schemas/testDataSchema.js';
 import * as contentController from '../controllers/contentController.js';
 
 const contentRouter = Router();
@@ -43,6 +45,7 @@ contentRouter.get(
 contentRouter.post(
 	'/tests/create',
 	validateToken,
+	validateSchema(testDataSchema),
 	contentController.createTest
 );
 

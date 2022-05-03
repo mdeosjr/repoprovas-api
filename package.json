@@ -11,6 +11,9 @@
 		"dev:test": "npx dotenv -e .env.test nodemon src/server.ts",
 		"test": "NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i"
 	},
+	"prisma": {
+		"seed": "ts-node prisma/seed.ts"
+	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
